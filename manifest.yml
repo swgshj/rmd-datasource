@@ -1,30 +1,30 @@
 #inherit: base-manifest.yml
 applications:
-  - name: {your-name}-rmd-datasource
+  - name: huijian.predix1-rmd-datasource
     path: target/rmd-datasource-2.0.27.jar
     memory: 512M
     services:
-        - {uaaService}
-        - {assetService}
-        - {timeSeriesService}
+        - huijian.predix1-uaa
+        - huijian.predix1-asset
+        - huijian.predix1-time-series
         #- {acsService}
 env:
     SPRING_PROFILES_ACTIVE : cloud,clouddev 
     # NOTE: Some values in curly braces are updated by scripts
-    predix_uaa_name: {uaaService}
-    predix_asset_name: {assetService}
-    predix_timeseries_name : {timeSeriesService}
-    predix_oauth_clientId : {clientId}:{secret}
+    predix_uaa_name: huijian.predix1-uaa
+    predix_asset_name: huijian.predix1-asset
+    predix_timeseries_name : predix1-time-series
+    predix_oauth_clientId : app_client_id:secret
     predix_rest_poolMaxSize: 200
     predix_timeseries_wspool_maxIdle : 5
     predix_timeseries_wspool_maxActive : 5
     
     #used by predix acs-spring-security-extensions
-    accessTokenEndpointUrl : https://{oauthRestHost}/oauth/token
-    clientId : {clientId}
-    clientSecret: {secret}
+    accessTokenEndpointUrl : https://3d151e75-1aa8-4290-9091-cfb31d5d207c.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token
+    clientId : app_client_id
+    clientSecret: secret
     #used by predix uaa-token-lib
-    trustedIssuerIdsRegexPattern : ^https://(.*\\.)?{oauthRestHost}/oauth/token$
+    trustedIssuerIdsRegexPattern : ^https://(.*\\.)?3d151e75-1aa8-4290-9091-cfb31d5d207c.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token$
     #logging - see application-cloud.properties
     logging_level_root: INFO
     logging_level_org_springframework: INFO
